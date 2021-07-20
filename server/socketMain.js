@@ -28,6 +28,10 @@ function socketMain(io, socket) {
     const mongooseResponse = await checkAndAdd(data);
     console.log(mongooseResponse);
   });
+
+  socket.on('perfData', (data) => {
+    io.to('ui').emit('data', data);
+  });
 }
 
 function checkAndAdd(data) {
