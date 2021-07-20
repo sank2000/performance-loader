@@ -54,6 +54,7 @@ function performanceData() {
     const numCores = cpus.length;
     const cpuSpeed = cpus[0].speed;
     const cpuLoad = await getCpuLoad();
+    const isActive = true;
     resolve({
       freeMem,
       totalMem,
@@ -65,6 +66,7 @@ function performanceData() {
       numCores,
       cpuSpeed,
       cpuLoad,
+      isActive,
     });
   });
 }
