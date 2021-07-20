@@ -24,6 +24,22 @@ function socketMain(io, socket) {
   socket.on('initPerfData', async (data) => {
     // update our socket connect function scoped variable
     macA = data.macA;
+
+    const mongooseResponse = await checkAndAdd(data);
+    console.log(mongooseResponse);
+  });
+}
+
+function checkAndAdd(data) {
+  return new Promise(async (resolve, reject) => {
+    const doc = await Machine.findOne({ macA: data.macA });
+    if (doc === null) {
+      let newMachine = new Machine(data);
+      await newMachine.save();
+      resolve('added');
+    } else {
+      resolve('found');
+    }
   });
 }
 
